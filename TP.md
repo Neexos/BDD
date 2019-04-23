@@ -55,3 +55,11 @@
   **WHERE** cinema.ville='Bordeaux' **AND** cinema.compagnie='indep' **AND** salle.taille_ecran > 30 **AND** salle.nbplaces > 100 **AND** personne.nom='Allen' **AND** programmation.horaire >= '22:00'  
 
 ## 9
+  Afficher tous les genres de film et les titres des films associés à chaque genre (jointure externe à gauche ou à droite):  
+  **SELECT** libellegenre, titre **FROM** genre  
+  **LEFT OUTER JOIN** film **ON** film.genre = genre.numgenre  
+  
+## 10
+  Afficher les cinémas dont les salles n’ont pas été saisies dans la base:
+  **SELEC** genre.libellegenre, titre **FROM** genre  
+  **LEFT OUTER JOIN** film **ON** genre.numgenre = film.genre  

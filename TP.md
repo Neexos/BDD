@@ -22,3 +22,20 @@
 ## 6
   Afficher  pour  chaque film, les nom et prénom des  acteurs  et leur  salaire  (afficher  le  titre  du film par ordre alphabétique et le salaire par ordre décroissant):  
   **SELECT** film.titre, personne.nom, personne.prenom, distribution.salaire **FROM** film **JOIN** distribution **ON** film.numfilm = distribution.numfilm **JOIN** acteur **ON** distribution.numacteur = acteur.numacteur **JOIN** personne **ON** personne.numpersonne = acteur.numpersonne **ORDER BY** titre **ASC**, salaire **DESC**;
+  
+## 7
+  Quels sont les acteurs dramatiques (nom, prénom) qui ont joué dans un film de Spielberg:  
+  **SELECT** test.prenom, test.nom  
+  **FROM** film  
+  **JOIN** distribution  
+	  **ON** distribution.numfilm = film.numfilm  
+  **JOIN** acteur  
+	  **ON** acteur.numacteur = distribution.numacteur  
+  **JOIN** genre  
+	  **ON** genre.numgenre = acteur.specialite  
+  **JOIN** personne AS "test"  
+	  **ON** test.numpersonne = acteur.numpersonne  
+  **JOIN** personne AS "real"  
+	  **ON** film.realisateur = real.numpersonne  
+	**WHERE** genre.libellegenre='Drame'  
+	**AND** real.nom='Spielberg'  

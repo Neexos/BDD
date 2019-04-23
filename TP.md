@@ -13,4 +13,12 @@
   
 ## 4
   Afficher tous les films (TITRE, ANNEE, REALISATEUR) qui n’ont pas été réalisés par Spielberg:  
-  **SELECT** titre,annee,realisateur **FROM** film **JOIN** personne **ON** realisateur = numpersonne **WHERE** realisateur **NOT IN** (**SELECT** numpersonne **FROM** personne **WHERE** nom='Spielberg')
+  **SELECT** titre,annee,nom **FROM** film **JOIN** personne **ON** realisateur = numpersonne **WHERE** realisateur **NOT IN** (**SELECT** numpersonne **FROM** personne **WHERE** nom='Spielberg')
+
+## 5
+  Afficher pour chaque réalisateur (nom, prénom) et chaque film (titre) son salaire à la minute de film:  
+  **SELECT** nom,prenom,titre,(salaire_real/longueur) **FROM** film **LEFT OUTER JOIN** personne **ON** realisateur=numpersonne
+
+## 6
+  Afficher  pour  chaque film, les nom et prénom des  acteurs  et leur  salaire  (afficher  le  titre  du film par ordre alphabétique et le salaire par ordre décroissant):  
+  

@@ -13,4 +13,4 @@
   
 ## 4
   Afficher tous les films (TITRE, ANNEE, REALISATEUR) qui n’ont pas été réalisés par Spielberg:  
-  
+  **SELECT** titre,annee,realisateur **FROM** film **JOIN** personne **ON** realisateur = numpersonne **WHERE** realisateur **NOT IN** (**SELECT** numpersonne **FROM** personne **WHERE** nom='Spielberg')

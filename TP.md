@@ -61,5 +61,35 @@
   
 ## 10
   Afficher les cinémas dont les salles n’ont pas été saisies dans la base:
-  **SELEC** genre.libellegenre, titre **FROM** genre  
-  **LEFT OUTER JOIN** film **ON** genre.numgenre = film.genre  
+  **SELECT** cinema.nom **FROM** cinema
+  **LEFT JOIN** salle **ON** cinema.numcinema = salle.numcinema
+  **WHERE** salle.numcinema IS NULL
+
+## 11
+  Ajouter la salle N°1 de 150 places, avec 1 écran de 40 m2 au cinéma Decavision (et non pas au cinéma N° 5...):  
+  **INSERT INTO** salle **SELECT** cinema.numcinema, '1' **AS** numsalle, '40' **AS** taille_ecran, '150' **AS** nbplaces **FROM** cinema **WHERE** cinema.nom='Decavision'
+  
+## 12
+  Afficher  les  programmations  dans  toutes les  salles  de tous les  cinémas  (même  si la  salle n’a pas de programmation) :  
+  **SELECT** cinema.nom,salle.numsalle,film.titre,programmation.date_deb,programmation.date_fin,horaire,prix  
+  **FROM** programmation  
+  **RIGHT OUTER JOIN** salle **ON** (salle.numcinema,salle.numsalle) = (programmation.numcinema,programmation.numsalle)  
+  **LEFT OUTER JOIN** cinema **ON** cinema.numcinema = salle.numcinema  
+  **LEFT OUTER JOIN** film **ON** programmation.numfilm = film.numfilm  
+  
+## 13
+  Quel est le total des salaires des acteurs du film «Jurassic Parc»:  
+  **SELECT SUM**(salaire) **FROM** distribution  
+  **JOIN** film **ON** film.numfilm = distribution.numfilm  
+  **JOIN** acteur **ON** acteur.numacteur = distribution.numacteur  
+  **WHERE** film.titre='Jurassic Parc'  
+  
+## 14
+  Donner le nombre de films par genre:  
+  **SELECT** genre.libellegenre, COUNT(\*) **FROM** genre  
+  **JOIN** film **ON** film.genre = genre.numgenre  
+  **GROUP BY** libellegenre  
+  
+## 15 
+  Supprimer de la table Genre ceux qui ne sont relatifs à aucun film:  
+  

@@ -21,4 +21,4 @@
 
 ## 6
   Afficher  pour  chaque film, les nom et prénom des  acteurs  et leur  salaire  (afficher  le  titre  du film par ordre alphabétique et le salaire par ordre décroissant):  
-  
+  **SELECT** film.titre, personne.nom, personne.prenom, distribution.salaire **FROM** film **JOIN** distribution **ON** film.numfilm = distribution.numfilm **JOIN** acteur **ON** distribution.numacteur = acteur.numacteur **JOIN** personne **ON** personne.numpersonne = acteur.numpersonne **ORDER BY** titre **ASC**, salaire **DESC**;

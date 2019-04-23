@@ -42,16 +42,16 @@
 	
 ## 8
   Quels sont les cinémas indépendants Bordelais, avec le film correspondant, qui passent un film de Woody Allen à partir de 22 heures dans une salle d'au moins 100 places et d'écran de taille supérieure à 30 m2:  
-**SELECT** *  
-**FROM** cinema  
-**JOIN** salle  
-**ON** salle.numcinema = cinema.numcinema  
-**JOIN** programmation  
-**ON**(programmation.numcinema, programmation.numsalle) = (salle.numcinema, salle.numsalle)  
-**JOIN** film  
-**ON** film.numfilm = programmation.numfilm  
-**JOIN** personne  
-**ON** personne.numpersonne = film.realisateur  
-**WHERE** cinema.ville='Bordeaux' **AND** cinema.compagnie='indep' **AND** salle.taille_ecran > 30 **AND** salle.nbplaces > 100 **AND** personne.nom='Allen' **AND** programmation.horaire >= '22:00'  
+  **SELECT** *  
+  **FROM** cinema  
+  **JOIN** salle  
+  **ON** salle.numcinema = cinema.numcinema  
+  **JOIN** programmation  
+  **ON**(programmation.numcinema, programmation.numsalle) = (salle.numcinema, salle.numsalle)  
+  **JOIN** film  
+  **ON** film.numfilm = programmation.numfilm  
+  **JOIN** personne  
+  **ON** personne.numpersonne = film.realisateur  
+  **WHERE** cinema.ville='Bordeaux' **AND** cinema.compagnie='indep' **AND** salle.taille_ecran > 30 **AND** salle.nbplaces > 100 **AND** personne.nom='Allen' **AND** programmation.horaire >= '22:00'  
 
 ## 9

@@ -28,14 +28,28 @@
   **SELECT** test.prenom, test.nom  
   **FROM** film  
   **JOIN** distribution  
-	  **ON** distribution.numfilm = film.numfilm  
+  **ON** distribution.numfilm = film.numfilm  
   **JOIN** acteur  
-	  **ON** acteur.numacteur = distribution.numacteur  
-  **JOIN** genre  
-	  **ON** genre.numgenre = acteur.specialite  
+  **ON** acteur.numacteur = distribution.numacteur  
+  **JOIN** genre
+  **ON** genre.numgenre = acteur.specialite  
   **JOIN** personne AS "test"  
-	  **ON** test.numpersonne = acteur.numpersonne  
+  **ON** test.numpersonne = acteur.numpersonne  
   **JOIN** personne AS "real"  
-	  **ON** film.realisateur = real.numpersonne  
-	**WHERE** genre.libellegenre='Drame'  
-	**AND** real.nom='Spielberg'  
+  **ON** film.realisateur = real.numpersonne  
+  **WHERE** genre.libellegenre='Drame'  
+  **AND** real.nom='Spielberg'  
+	
+## 8
+  Quels sont les cinémas indépendants Bordelais, avec le film correspondant, qui passent un film de Woody Allen à partir de 22 heures dans une salle d'au moins 100 places et d'écran de taille supérieure à 30 m2:  
+**SELECT** *
+**FROM** cinema
+**JOIN** salle 
+**ON** salle.numcinema = cinema.numcinema
+**JOIN** programmation 
+**ON**(programmation.numcinema, programmation.numsalle) = (salle.numcinema, salle.numsalle)
+**JOIN** film 
+**ON** film.numfilm = programmation.numfilm
+**JOIN** personne 
+**ON** personne.numpersonne = film.realisateur
+**WHERE** cinema.ville='Bordeaux' **AND** cinema.compagnie='indep' **AND** salle.taille_ecran > 30 **AND** salle.nbplaces > 100 **AND** personne.nom='Allen' **AND** programmation.horaire >= '22:00'

@@ -142,14 +142,28 @@ alter table OUVRAGE
 ## Question 4  
   Afin d'améliorer les performances d'accès aux données, définissez un index sur toutes les colonnes de type clé étrangère (les opérations de jointure seront plus rapides; nous y reviendrons lors d’un prochain TP sur l’optimisation).  
   
+  **CREATE INDEX** index_membre **ON** emprunt (num_membre)  
+  **CREATE INDEX** index_detail **ON** detailemprunt (num_emprunt, isbn, num_exemplaire)  
+  **CREATE INDEX** index_ouvrage **ON** ouvrage (code_genre,num_editeur)  
   
   
 ## Question 5  
-  À l'usage, on se rend compte que lorsque l'on souhaite supprimer une fiche d'emprunt, il faut nécessairement supprimer toutes les lignes présentes dans la table DetailEmprunt qui font référence à la ligne de la table Emprunt que l'on souhaite supprimer. Modifiez le comportement de la contrainte de clé étrangère en cas de suppression de la ligne maîtrepour rendre automatique une telle suppression. 
+  À l'usage, on se rend compte que lorsque l'on souhaite supprimer une fiche d'emprunt, il faut nécessairement supprimer toutes les lignes présentes dans la table DetailEmprunt qui font référence à la ligne de la table Emprunt que l'on souhaite supprimer. Modifiez le comportement de la contrainte de clé étrangère en cas de suppression de la ligne maîtrepour rendre automatique une telle suppression.  
+  
+  **ALTER TABLE** detailemprunt  
+   **ADD CONSTRAINT** num_emprunt   
+	**FOREIGN KEY** (num_emprunt)  
+	**REFERENCES** emprunt (num_emprunt)  
+	**ON DELETE CASCADE**  
   
 ## Question 6  
-  Modifiez la table des exemplaires afin que la colonne code_etat prenne par défaut la valeur "NE" ce qui signifie que l'état d'un nouvel exemplaire est par défaut neuf (clause DEFAULT; cf. commande ALTER TABLE).
+  Modifiez la table des exemplaires afin que la colonne code_etat prenne par défaut la valeur "NE" ce qui signifie que l'état d'un nouvel exemplaire est par défaut neuf (clause DEFAULT; cf. commande ALTER TABLE).  
+  
+  **ALTER TABLE** exemplaire 
+	**ALTER** code_etat **SET DEFAULT** 'NE'
   
 ## Question 7  
-  La table DetailEmprunt n'est pas bien nommée. Le nom Detail semble préférable. Renommez la table afin de prendre en compte cette nouvelle exigence (cf. commande ALTER TABLE).
+  La table DetailEmprunt n'est pas bien nommée. Le nom Detail semble préférable. Renommez la table afin de prendre en compte cette nouvelle exigence (cf. commande ALTER TABLE).  
+  
+  **ALTER TABLE** detailemprunt **RENAME TO** detail
   

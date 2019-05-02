@@ -128,16 +128,28 @@ alter table OUVRAGE
 ```
 
 ## Question 2  
-  Les membres sont très nombreux et si certains fréquentent souvent la bibliothèque, d'autres au contraire ne renouvellent pas leur adhésion tous les ans. Pour ces derniers, il n'est pas souhaitable d'avoir des informations en double dans la base. Aussi il ne doit pas être possible d'avoir deux membres qui possèdent mêmes nom, prénom et numéro de téléphone fixe. Définissez une contrainte afin de satisfaire cette nouvelle exigence. La contrainte sera ajoutée sur la table des membres (instruction alter table). 
+  Les membres sont très nombreux et si certains fréquentent souvent la bibliothèque, d'autres au contraire ne renouvellent pas leur adhésion tous les ans. Pour ces derniers, il n'est pas souhaitable d'avoir des informations en double dans la base. Aussi il ne doit pas être possible d'avoir deux membres qui possèdent mêmes nom, prénom et numéro de téléphone fixe. Définissez une contrainte afin de satisfaire cette nouvelle exigence. La contrainte sera ajoutée sur la table des membres (instruction alter table).   
   
-## Question 3
-  De plus en plus de membres possèdent deux numéros de téléphone : un pour le poste fixe de leur domicile et un pour leur téléphone portable. Or, la base nous permet de stocker un seul numéro de téléphone. Apportez les modifications de structure nécessaires pour prendre en compte cette modification.Comme cette nouvelle colonne, nommée MOBILE, va contenir des informations relatives à un numéro de téléphone portable, mettez en place une contrainte d'intégrité afin de vous assurer que le numéro de téléphone saisi commence bien par 06 ou par 07 (contrainte de type check. Utilisez des fonctions de manipulation de chaines et notamment la commande like) 
-## Question 4 
-  Afin d'améliorer les performances d'accès aux données, définissez un index sur toutes les colonnes de type clé étrangère (les opérations de jointure seront plus rapides; nous y reviendrons lors d’un prochain TP sur l’optimisation).
-## Question 5 
+  **ALTER TABLE** membre  
+  **ADD CONSTRAINT** num_membre **UNIQUE** (nom,prenom,telephone)  
+  
+## Question 3  
+  De plus en plus de membres possèdent deux numéros de téléphone : un pour le poste fixe de leur domicile et un pour leur téléphone portable. Or, la base nous permet de stocker un seul numéro de téléphone. Apportez les modifications de structure nécessaires pour prendre en compte cette modification.Comme cette nouvelle colonne, nommée MOBILE, va contenir des informations relatives à un numéro de téléphone portable, mettez en place une contrainte d'intégrité afin de vous assurer que le numéro de téléphone saisi commence bien par 06 ou par 07 (contrainte de type check. Utilisez des fonctions de manipulation de chaines et notamment la commande like)  
+  
+  **ALTER TABLE** membre  
+  **ADD COLUMN** MOBILE **VARCHAR(10) CHECK**(mobile **LIKE** '^0[6-7]') **UNIQUE**  
+  
+## Question 4  
+  Afin d'améliorer les performances d'accès aux données, définissez un index sur toutes les colonnes de type clé étrangère (les opérations de jointure seront plus rapides; nous y reviendrons lors d’un prochain TP sur l’optimisation).  
+  
+  
+  
+## Question 5  
   À l'usage, on se rend compte que lorsque l'on souhaite supprimer une fiche d'emprunt, il faut nécessairement supprimer toutes les lignes présentes dans la table DetailEmprunt qui font référence à la ligne de la table Emprunt que l'on souhaite supprimer. Modifiez le comportement de la contrainte de clé étrangère en cas de suppression de la ligne maîtrepour rendre automatique une telle suppression. 
-## Question 6
+  
+## Question 6  
   Modifiez la table des exemplaires afin que la colonne code_etat prenne par défaut la valeur "NE" ce qui signifie que l'état d'un nouvel exemplaire est par défaut neuf (clause DEFAULT; cf. commande ALTER TABLE).
-## Question 7
+  
+## Question 7  
   La table DetailEmprunt n'est pas bien nommée. Le nom Detail semble préférable. Renommez la table afin de prendre en compte cette nouvelle exigence (cf. commande ALTER TABLE).
   

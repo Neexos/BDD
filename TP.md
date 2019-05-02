@@ -92,4 +92,29 @@
   
 ## 15 
   Supprimer de la table Genre ceux qui ne sont relatifs à aucun film:  
+  **DELETE FROM** genre  
+  **WHERE** numgenre=(  
+  **select** numgenre **from** genre  
+  **left join** film **on** genre=numgenre  
+  **where** film.genre **is** null)  
   
+## 16
+  Trouver  le  genre  des  films  des  années  90  dont  le  budget  moyen  (du  genre)  dépasse 10.000.000 $:  
+  **SELECT** libellegenre,budget **FROM** film  
+  **JOIN** genre **ON** genre=numgenre  
+  **WHERE** budget=(  
+	**SELECT MAX**(budget) **FROM** film)  
+	
+## 17
+  Afficher les réalisateurs qui n’habitent pas dans les villes où il y a un cinéma:  
+  **SELECT DISTINCT** nom, prenom **FROM** personne  
+  **JOIN** film **ON** film.realisateur=personne.numpersonne  
+  **WHERE** personne.adresse **NOT IN**(  
+	**SELECT** adresse **FROM** cinema)  
+  **ORDER BY** nom **ASC**  
+  
+## 18
+  Trouver le titre et l’année du film le plus long:  
+  **SELECT** titre,annee,longueur **FROM** film  
+  **WHERE** longueur=(  
+	**SELECT MAX**(longueur) **FROM** film)   

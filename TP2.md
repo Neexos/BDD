@@ -167,3 +167,23 @@ alter table OUVRAGE
   
   **ALTER TABLE** detailemprunt **RENAME TO** detail
   
+## Question 8  
+  Regardez puis exécutez le script «ScripInsertBiblio.sql»permettant d’insérer des données dans les tables MEMBRE (les numéros des membres devront varier de1 à 10, sinon cela ne fonctionnera pas!), GENRE, EDITEUR, OUVRAGE, EXEMPLAIRE, EMPRUNT et DETAIL
+Remarque 1: pour utiliser la valeur par défaut d’une colonne lors de l’insertion, il est possible d’utiliser le mot clé DEFAULT.
+Remarque 2: Insertions desdonnées suivantes dans la table EXEMPLAIRE.
+Pour tous les autres titres, il existe un exemplaire  (le numéro 1) à l'état Bon et un  second  exemplaire  (le numéro 2) dont l'état est Moyen.Tout d'abord, le script traite tous les exemplaires de la même façon, puis supprime les informations ajoutées  en  trop.  Enfin,  il  ajoute  les  informations  spécifiques  aux  exemplaires  listés  dans  le  tableau précédent.
+
+## Question 9  
+  Pour faciliter la gestion de l'état des emprunts et identifier plus rapidement les fiches pour lesquelles l'ensemble des exemplaires n'est pas restitué, on décide d'ajouter une colonne etat_emprunt (dans la table EMPRUNTS) qui peut prendre les valeurs EC(en cours) par défaut et RE (rendue) lorsque l'ensemble des exemplaires est restitué.Écrivez l'instruction SQL qui permet d'effectuer la modification de structure souhaitée. Mettez ensuite à jour l'état de chaque fiche de location en le faisant passer àRE (rendue) si tous les ouvrages empruntés par le membre ont été restitués à la bibliothèque.
+  Indications:La requête UPDATE contiendra une requête SELECT imbriquée. Cette requête SELECT permet d'établir la liste des emprunts pour lesquels au moins un ouvrage n’a pas été retourné. La mise à jour de la table des emprunts ne concerne que les emprunts qui ne sont pas dans cette liste et dont l'état actuel est 'EC'. Dans ce sens-là,cela fonctionne parfaitement. Dans l’autre sens, cela ne fonctionnera pas, car si l’un des exemplaires n’a pas été rendu pour un emprunt donné, l’état sera mis à ‘RE’.
+
+## Question 10  
+  Exécutez le script «ScriptMajBiblio.sql»permettant d’ajouter des données dans la table DETAIL et de réinitialiser l’état d’un exemplaire.
+
+## Question 11  
+  Créer une vue établissant la liste des membres qui ont emprunté un ouvrage depuis plus de 2 semaines (ouvrage non rendu!) en indiquant le nom de l’ouvrage.
+  Indications: vous pourrez utiliser les instructions to_char et cast. Exemple: cast(champ_texte as numeric);
+
+## Question 12  
+  Créer une table temporaire globalequi contiennele nombre de locations par titre et le nombre de locations de chaque exemplaire.Indications:1ère étape: créer une table temporaire globale, dans laquelle les informations vont être ajoutées au fur et à mesure de leur calcul.2ème étape: Ajouter les informations relatives à chaque exemplaire (insert)3ème étape: Ajouter les informations relatives à chaque ouvrage (update)
+  Visualiser les données de la table temporaire.select * from SyntheseEmprunts order by isbn, num_exemplaire;Puis, supprimer les données de la table et supprimer la table

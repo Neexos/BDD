@@ -137,7 +137,7 @@ alter table OUVRAGE
   De plus en plus de membres possèdent deux numéros de téléphone : un pour le poste fixe de leur domicile et un pour leur téléphone portable. Or, la base nous permet de stocker un seul numéro de téléphone. Apportez les modifications de structure nécessaires pour prendre en compte cette modification.Comme cette nouvelle colonne, nommée MOBILE, va contenir des informations relatives à un numéro de téléphone portable, mettez en place une contrainte d'intégrité afin de vous assurer que le numéro de téléphone saisi commence bien par 06 ou par 07 (contrainte de type check. Utilisez des fonctions de manipulation de chaines et notamment la commande like)  
   
   **ALTER TABLE** membre  
-  **ADD COLUMN** MOBILE **VARCHAR(10) CHECK**(mobile **LIKE** '^0[6-7]') **UNIQUE**  
+  **ADD COLUMN** MOBILE **VARCHAR(10) CHECK**(mobile **LIKE** '^[06-7]\d{9}') **UNIQUE**  
   
 ## Question 4  
   Afin d'améliorer les performances d'accès aux données, définissez un index sur toutes les colonnes de type clé étrangère (les opérations de jointure seront plus rapides; nous y reviendrons lors d’un prochain TP sur l’optimisation).  

@@ -68,6 +68,38 @@ idem que précédemment.
 On voit que l'index sur le nom est plus gros d'une soixantaine de kB.
 
 ### 3
+#### a) Sans index
+``` sql
+SELECT * FROM realisateur where ID=2800 OR NOM ='spielberg';
+```
+![Img 3_Qa](https://github.com/Neexos/BDD/blob/master/img/3_a.PNG)  
+Le coût de la rêquete est compris entre 0 et 127,64
 
-a.
+#### b) Création d'un index sur le réalisateur ID
+![Img 3_Qa](https://github.com/Neexos/BDD/blob/master/img/3_a.PNG)
+Le coût est le même que celui sans index car la requête comporte un OR, le champs nom n'est pas indexé donc SEQ SCAN.
+
+#### c) Ajout de l'ID nom sur la table réalisateur
+![Img 3_Qc](https://github.com/Neexos/BDD/blob/master/img/3_c.PNG)
+Le coût est cette fois bien moins important; il est compris entre 8,58 et 15,23
+
+### 4
+```sql 
+SELECT * FROM realisateur where ID>1000
+```
+#### a) Sans ID
+
+![Img 4_Qa](https://github.com/Neexos/BDD/blob/master/img/4_a.PNG)
+Le coût est cette fois compris entre 0 et 112,7
+#### b) Avec index sur réalisateur ID
+![Img 4_Qa](https://github.com/Neexos/BDD/blob/master/img/4_a.PNG)
+Le coût est identique car le nombre de valeur à récupérer est important. On met finalement moins de temps avec un SEQ SCAN qu'avec un INDEX SCAN
+
+### 5
+```sql
+SELECT * FROM realisateur where ID>4000;
+```
+#### a) Avec ID
+![Img 5_Qa](https://github.com/Neexos/BDD/blob/master/img/5_a.PNG)
+On peut voir qu'avec un nombre de valeur à récupérer moins important, le SGBD utilise
 

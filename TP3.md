@@ -64,3 +64,5 @@ EXPLAIN SELECT * FROM realisateur where ID=2800 AND NOM='spielberg';
 ```
 ![Img B_Q6](https://github.com/Neexos/BDD/blob/master/img/B_Q6.PNG)  
 idem que précédemment.
+
+

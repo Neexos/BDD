@@ -6,4 +6,4 @@ PostgreSQL 11.2
 ``` sql
 EXPLAIN SELECT * FROM realisateur where ID=280
 ```
-![Img Q1](/img/B_Q1.png)
+![Img Q1](./img/B_Q1.png)

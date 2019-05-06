@@ -101,7 +101,22 @@ SELECT * FROM realisateur where ID>4000;
 ```
 #### a) Avec ID
 ![Img 5_Qa](https://github.com/Neexos/BDD/blob/master/img/5_a.PNG)
-On peut voir qu'avec un nombre de valeur à récupérer moins important, le SGBD utilise
+On peut voir qu'avec un nombre de valeur à récupérer moins important, le SGBD utilise donc un INDEX SCAN
 
-#### b) Avec ID
-![Img 5_Qa](https://github.com/Neexos/BDD/blob/master/img/5_a.PNG)
+### 6
+#### a) Après ajout de l'index IDX_TITRES
+```sql
+CREATE  UNIQUE  INDEX IDX_TITRES ON TITRES(id_film, titre, langue);
+SELECT * FROM TITRES WHERE titre = 'Char';
+```
+![Img 6_Qa](https://github.com/Neexos/BDD/blob/master/img/6_a.PNG)
+#### b) Après suppresion et ajout de l'index IDX_TITRES
+```sql
+CREATE UNIQUE INDEX IDX_TITRES ON TITRES(titre, id_film, langue);
+SELECT * FROM TITRES WHERE titre = 'Char';
+```
+![Img 6_Qb](https://github.com/Neexos/BDD/blob/master/img/6_b.PNG)
+
+
+
+

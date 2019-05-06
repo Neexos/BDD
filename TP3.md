@@ -104,19 +104,43 @@ SELECT * FROM realisateur where ID>4000;
 On peut voir qu'avec un nombre de valeur à récupérer moins important, le SGBD utilise donc un INDEX SCAN
 
 ### 6
-#### a) Après ajout de l'index IDX_TITRES
+#### a) Après ajout de l'index unique IDX_TITRES(id_film, titre, langue)
 ```sql
 CREATE  UNIQUE  INDEX IDX_TITRES ON TITRES(id_film, titre, langue);
 SELECT * FROM TITRES WHERE titre = 'Char';
 ```
 ![Img 6_Qa](https://github.com/Neexos/BDD/blob/master/img/6_a.PNG)
-#### b) Après suppresion et ajout de l'index IDX_TITRES
+LE SGBD fait un SEQ SCAN avec un coût compris entre 0 et 395,09 (très long car l'index est composé de 3 champs et le premier champs est différent de celui utilisé dans la condition)
+
+#### b) Après suppresion et ajout de l'index unique IDX_TITRES(titre, id_film, langue)
 ```sql
 CREATE UNIQUE INDEX IDX_TITRES ON TITRES(titre, id_film, langue);
 SELECT * FROM TITRES WHERE titre = 'Char';
 ```
 ![Img 6_Qb](https://github.com/Neexos/BDD/blob/master/img/6_b.PNG)
+LE SGBD fait un INDEX ONLY SCAN avec un coût compris entre 0,29 et 8,3 (c'est moins long car postgreSQL utilise seulement le premier champs "titre" lors du scan, et par chance ici la condition est faite sur le titre)
 
+#### c) Après suppresion et ajout d'un index non unique
+```sql
+DROP INDEX IDX_TITRES;
+CREATE INDEX IDX_TITRES_TITRE ON TITRES(titre);
+```
+![Img 6_Qc](https://github.com/Neexos/BDD/blob/master/img/6_c.PNG)
+idem que la question précèdente.
 
+##### d) Synthèse
+```sql
+DROP INDEX IDX_TITRES_TITRE;
+```
+Il vaut mieux créer un index sur un seul champs car la plupart du temps c'est plus optimisé.
 
-
+### 7
+```sql
+SELECT * FROM TITRES WHERE titre = 'Char' AND ID_FILM=1000;
+```
+#### a) Création d'un index unique
+```sql
+CREATE UNIQUE INDEX IDX_TITRES ON TITRES(id_film, titre, langue);
+```
+#### b) Plan d'éxécutiuon
+SELECT * FROM TITRES WHERE titre = 'Char' ORID_FILM=1000;

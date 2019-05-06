@@ -1,6 +1,10 @@
 # TP3
 PostgreSQL 11.2  
 
+## Contributors
+ - MEYNET Léo
+ - PETIT Alexandre
+
 ## REQUETES:  
 ### 1  
 a. Sans index:

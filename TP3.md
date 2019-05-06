@@ -12,7 +12,8 @@ Coût de la requête compris entre 0 et 112,70.
 
 2. Création d'un index sur l'id réalisateur:  
 ``` sql
-CREATE UNIQUE INDEX IDX_REALISATEUR_ID ON REALISATEUR(ID)
+CREATE UNIQUE INDEX IDX_REALISATEUR_ID ON REALISATEUR(ID);
+EXPLAIN SELECT * FROM realisateur where ID=280;
 ```
 ![Img B_Q2](https://github.com/Neexos/BDD/blob/master/img/B_Q2.PNG)  
 
@@ -28,7 +29,14 @@ DROP INDEX IDX_REALISATEUR_I
 ### B  
 1. Sans index:  
 ``` sql 
-EXPLAIN SELECT * FROM realisateur where ID=2800AND NOM ='spielberg
+EXPLAIN SELECT * FROM realisateur where ID=2800 AND NOM ='spielberg
 ```
 ![Img B_Q3](https://github.com/Neexos/BDD/blob/master/img/B_Q3.PNG)  
-Coût de la requête compris entre 0 et 127,64
+Coût de la requête compris entre 0 et 127,64  
+
+2. Création d'un index sur l'id réalisateur:  
+``` sql
+CREATE UNIQUE INDEX IDX_REALISATEUR_ID ON REALISATEUR(ID);
+EXPLAIN SELECT * FROM realisateur where ID=2800;
+```
+![Img B_Q4](https://github.com/Neexos/BDD/blob/master/img/B_Q4.PNG)  

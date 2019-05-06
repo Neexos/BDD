@@ -68,10 +68,10 @@ idem que précédemment.
 On voit que l'index sur le nom est plus gros d'une soixantaine de kB.
 
 ### 3
-#### a) Sans index
 ``` sql
 SELECT * FROM realisateur where ID=2800 OR NOM ='spielberg';
 ```
+#### a) Sans index
 ![Img 3_Qa](https://github.com/Neexos/BDD/blob/master/img/3_a.PNG)  
 Le coût de la rêquete est compris entre 0 et 127,64
 
@@ -103,3 +103,5 @@ SELECT * FROM realisateur where ID>4000;
 ![Img 5_Qa](https://github.com/Neexos/BDD/blob/master/img/5_a.PNG)
 On peut voir qu'avec un nombre de valeur à récupérer moins important, le SGBD utilise
 
+#### b) Avec ID
+![Img 5_Qa](https://github.com/Neexos/BDD/blob/master/img/5_a.PNG)

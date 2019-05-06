@@ -1,4 +1,8 @@
 # TP3
 PostgreSQL 11.2  
 
-## Question 1: 
+## REQUETES:  
+1. Sans index:
+``` sql
+EXPLAIN SELECT * FROM realisateur where ID=280
+```
